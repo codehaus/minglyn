@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mylyn Connector for Mingle - UI Plug-in
+Bundle-SymbolicName: com.thoughtworks.mingle.mylyn.ui;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: com.thoughtworks.mingle.mylyn.ui.Activator
+Bundle-Vendor: ThoughtWorks
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.mylyn.tasks.ui,
+ org.eclipse.mylyn.tasks.core,
+ com.thoughtworks.mingle.mylyn.core,
+ org.eclipse.search,
+ org.eclipse.ui.forms
+Eclipse-LazyStart: true
+Bundle-ClassPath: .
+Export-Package: com.thoughtworks.mingle.mylyn.ui,
+ com.thoughtworks.mingle.mylyn.ui.tasklist

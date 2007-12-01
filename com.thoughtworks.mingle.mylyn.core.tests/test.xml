@@ -1,0 +1,34 @@
+<project name="com.thoughtworks.mingle.mylyn.core.tests" default="run" basedir=".">
+	<property name="eclipse-home" value="${basedir}\..\.." />
+	<property name="plugin-name" value="com.thoughtworks.mingle.mylyn.core.tests" />
+	<property name="library-file" value="${eclipse-home}/plugins/org.eclipse.test_3.2.0/library.xml" />
+
+	<target name="init">
+		<tstamp />
+		<delete>
+			<fileset dir="${eclipse-home}" includes="org*.xml" />
+		</delete>
+	</target>
+
+	<target name="suite">
+		<property name="data-folder" value="${eclipse-home}/workspace" />
+		<echo>Using ${data-folder} as the workspace</echo>
+		<delete dir="${data-folder}" quiet="true" />
+		
+		<ant target="core-test" antfile="${library-file}" dir="${eclipse-home}">
+			<property name="data-dir" value="${data-folder}" />
+			<property name="plugin-name" value="${plugin-name}" />
+			<property name="classname" value="com.thoughtworks.mingle.mylyn.core.AllTests" />
+		</ant>
+	</target>
+
+	<target name="cleanup" />
+
+	<target name="run" depends="init, suite, cleanup">
+		<ant target="collect" antfile="${library-file}" dir="${eclipse-home}">
+			<property name="includes" value="com.thoughtworks*.xml" />
+			<property name="output-file" value="${plugin-name}.xml" />
+		</ant>
+	</target>
+
+</project>

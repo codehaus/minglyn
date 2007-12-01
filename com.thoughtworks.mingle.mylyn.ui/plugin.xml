@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.mylyn.tasks.ui.repositories">
+      <connectorCore
+            class="com.thoughtworks.mingle.mylyn.core.MingleRepositoryConnector"
+            id="com.thoughtworks.mingle.mylyn.tasklist.repositories"
+            name="Mylyn Repository Connector"
+            type="mingle">
+      </connectorCore>
+      <taskListFactory
+            class="com.thoughtworks.mingle.mylyn.ui.tasklist.MingleTaskListFactory"
+            id="com.thoughtworks.mingle.mylyn.tasklist.factory">
+      </taskListFactory>
+      <connectorUi
+            brandingIcon="icons/eview16/mingle-logo.gif"
+            class="com.thoughtworks.mingle.mylyn.ui.tasklist.MingleConnectorUi"
+            name="Minlgle Connector UI"
+            overlayIcon="icons/eview16/mingle-overlay.gif">
+      </connectorUi>
+   </extension>
+
+</plugin>

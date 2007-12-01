@@ -1,0 +1,99 @@
+<project name="com.rcpquickstart.helloworld.build" default="all">
+	<property file="build.developer.properties" />
+	<property file="build.properties" />
+
+	<property name="test-sandbox" value="${basedir}/test-sandbox" />
+
+	<property name="eclipse-platform-properties" value="-Dosgi.ws=${ws} -Dosgi.os=${os} -Dosgi.arch=${arch} -Dws=${ws} -Dos=${os} -Darch=${arch}" />
+
+	<target name="clean" description="cleans the output folders">
+		<delete dir="${buildDirectory}" />
+	</target>
+
+	<target name="copy-sources" depends="copy-features, copy-plugins" description="copies sources" />
+
+	<target name="copy-eclipse" description="copies an eclispse instance to a temporary location">
+		<sync todir="${eclipseLocation}" includeemptydirs="true">
+			<fileset dir="${base}" />
+			<fileset dir="${mylyn-base}" />
+		</sync>
+	</target>
+
+	<target name="copy-features" description="copies the feature sources into the features folder">
+		<sync todir="${buildDirectory}/features" includeemptydirs="true">
+			<fileset dir="../">
+				<include name="com.thoughtworks.mingle.mylyn/**" />
+			</fileset>
+		</sync>
+	</target>
+
+	<target name="copy-plugins" description="copies plugin sources into the plugins folder">
+		<sync todir="${buildDirectory}/plugins" includeemptydirs="true">
+			<fileset dir="../">
+				<include name="com.thoughtworks.mingle.mylyn.*/**" />
+				<exclude name="com.thoughtworks.mingle.mylyn.build/**" />
+			</fileset>
+		</sync>
+	</target>
+
+	<target name="init" depends="clean" description="initializes the build directory structure">
+		<mkdir dir="${buildDirectory}" />
+		<mkdir dir="${buildDirectory}/plugins" />
+		<mkdir dir="${buildDirectory}/features" />
+	</target>
+
+	<target name="pde-build" depends="copy-all">
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true" dir="${basedir}">
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg value="-buildfile" />
+			<arg value="${eclipseLocation}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/build.xml" />
+			<arg value="-Dtimestamp=${timestamp}" />
+
+			<arg value="-Dbuilder=${basedir}" />
+			<arg value="-Dbasedir=${basedir}" />
+			<arg value="-Dbuild_directory=${buildDirectory}" />
+			<classpath>
+				<pathelement location="${eclipseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+			</classpath>
+		</java>
+	</target>
+
+
+	<target name="-run-minglyn-core-tests-init">
+		<copy todir="${test-sandbox}">
+			<fileset dir="${buildDirectory}/${buildLabel}/">
+				<include name="com.thoughtworks.mingle.mylyn-${buildId}*.zip" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="run-minglyn-core-tests" depends="-run-minglyn-core-tests-init" description="runs the core tests for the connector">
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true" dir="${test-sandbox}">
+			
+			<arg value="-Dos=${os}" />
+			<arg value="-Dws=${ws}" />
+			<arg value="-Darch=${arch}" />
+			<arg value="-D${installmode}=true" />
+			
+			<arg value="-Dmylyn.base=${mylyn-base}" />
+				
+			<arg value="-workspace" />
+			<arg value="${test-sandbox}/workspace" />
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg value="-file" />
+			<arg value="${test-sandbox}/test.xml" />
+			
+			
+			<jvmarg value="-Xmx512M" />
+			<classpath>
+				<pathelement location="${eclipseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+			</classpath>
+		</java>
+	</target>
+
+	<target name="copy-all" depends="copy-eclipse, copy-sources" description="copies eclipse and minglyn sources" />
+
+	<target name="all" depends="init, copy-all, pde-build, run-minglyn-core-tests" description="the default target" />
+</project>

@@ -1,0 +1,5 @@
+<project name="mingle mylyn build" default="delegate">
+	<target name="delegate">
+		<ant dir="com.thoughtworks.mingle.mylyn.build" />
+	</target>
+</project>

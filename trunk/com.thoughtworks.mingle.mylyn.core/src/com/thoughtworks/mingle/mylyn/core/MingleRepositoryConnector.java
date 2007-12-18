@@ -108,7 +108,7 @@ public class MingleRepositoryConnector extends AbstractRepositoryConnector {
 			monitor.beginTask("Running mingle query", IProgressMonitor.UNKNOWN);
 			client.validate();
 			
-			List<AbstractTask> tasks = client.getAllTasks(projectName);
+			MingleTaskList tasks = client.getAllTasks(projectName);
 			for (AbstractTask abstractTask : tasks) {
 				resultCollector.accept(abstractTask);
 			}

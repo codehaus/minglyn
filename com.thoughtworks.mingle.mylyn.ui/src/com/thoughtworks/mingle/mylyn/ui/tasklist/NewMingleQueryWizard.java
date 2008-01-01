@@ -14,7 +14,7 @@ public class NewMingleQueryWizard extends AbstractEditQueryWizard {
 	 * @param repository
 	 */
 	public NewMingleQueryWizard(TaskRepository repository) {
-		this(repository, new MingleRepositoryQuery("Mingle Query", "tide", repository));
+		this(repository, new MingleRepositoryQuery("", "", repository));
 	}
 
 	public NewMingleQueryWizard(TaskRepository repository, MingleRepositoryQuery query) {

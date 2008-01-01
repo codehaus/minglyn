@@ -11,37 +11,36 @@ import com.thoughtworks.mingle.mylyn.core.MingleRepositoryQuery;
 
 /**
  * @author Ketan Padegaonkar
- * 
  */
 public class MingleConnectorUi extends AbstractRepositoryConnectorUi {
 
-	@Override
-	public String getConnectorKind() {
-		return Activator.CONNECTOR_KIND;
-	}
+    @Override
+    public String getConnectorKind() {
+        return Activator.CONNECTOR_KIND;
+    }
 
-	@Override
-	public IWizard getNewTaskWizard(TaskRepository taskRepository) {
-		return null;
-	}
+    @Override
+    public IWizard getNewTaskWizard(TaskRepository taskRepository) {
+        throw new RuntimeException("not implemented");
+    }
 
-	@Override
-	public IWizard getQueryWizard(TaskRepository repository, AbstractRepositoryQuery queryToEdit) {
-		if (queryToEdit instanceof MingleRepositoryQuery)
-			return new NewMingleQueryWizard(repository, (MingleRepositoryQuery)queryToEdit); // FIXME: implement a NewMingleQueryWizard
-		return new NewMingleQueryWizard(repository);
+    @Override
+    public IWizard getQueryWizard(TaskRepository repository, AbstractRepositoryQuery queryToEdit) {
+        if (queryToEdit instanceof MingleRepositoryQuery)
+            return new NewMingleQueryWizard(repository, (MingleRepositoryQuery) queryToEdit);
+        // FIXME: implement a NewMingleQueryWizard
+        return new NewMingleQueryWizard(repository);
+    }
 
-	}
+    @Override
+    public AbstractRepositorySettingsPage getSettingsPage() {
+        return new MingleRepositorySettingsPage(this);
+    }
 
-	@Override
-	public AbstractRepositorySettingsPage getSettingsPage() {
-		return new MingleRepositorySettingsPage(this);
-	}
-
-	@Override
-	public boolean hasSearchPage() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean hasSearchPage() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 }

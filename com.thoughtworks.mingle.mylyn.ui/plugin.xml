@@ -20,5 +20,20 @@
             overlayIcon="icons/eview16/mingle-overlay.gif">
       </connectorUi>
    </extension>
+   <extension
+         point="org.eclipse.mylyn.tasks.ui.editors">
+      <editorFactory
+            class="com.thoughtworks.mingle.mylyn.ui.MingleTaskEditorFactory">
+      </editorFactory>
+   </extension>
+   <extension
+         point="org.eclipse.mylyn.tasks.core.templates">
+      <repository
+            addAutomatically="true"
+            label="TidePair4"
+            repositoryKind="mingle"
+            urlRepository="http://tidepair4:8080">
+      </repository>
+   </extension>
 
 </plugin>

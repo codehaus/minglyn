@@ -3,8 +3,6 @@ package com.thoughtworks.mingle.mylyn.core;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.eclipse.mylyn.tasks.core.AbstractTask;
-
 /**
  * @author Ketan Padegaonkar
  *

@@ -20,6 +20,7 @@ import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.eclipse.mylyn.tasks.core.RepositoryTaskData;
 import org.eclipse.mylyn.tasks.core.TaskRepository;
 
 import com.thoughtworks.mingle.mylyn.core.exceptions.CouldNotParseTasksException;
@@ -160,5 +161,10 @@ public class MingleClient {
             CouldNotParseTasksException {
         return getAllTasks(projectName).getTaskWithId(taskId);
     }
+
+    public RepositoryTaskData getTaskData(String taskId) {
+        return new RepositoryTaskData(new MingleAttributeFactory(), Activator.CONNECTOR_KIND, this.serverUrl.toString(), taskId);
+    }
+
 
 }

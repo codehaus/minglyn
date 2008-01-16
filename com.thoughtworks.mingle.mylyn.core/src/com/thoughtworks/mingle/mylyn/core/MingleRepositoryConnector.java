@@ -42,25 +42,24 @@ public class MingleRepositoryConnector extends AbstractRepositoryConnector {
     @Override
     public boolean canCreateNewTask(TaskRepository repository) {
         // TODO Auto-generated method stub
-        return false;
+        throw new RuntimeException("Not Implemented");
     }
 
     @Override
     public boolean canCreateTaskFromKey(TaskRepository repository) {
-        // VERIFY
-        return true;
+        // TODO Auto-generated method stub
+        throw new RuntimeException("Not Implemented");
     }
 
     @Override
     public AbstractTask createTask(String repositoryUrl, String id, String summary) {
         // TODO Auto-generated method stub
-        return null;
+        throw new RuntimeException("Not Implemented");
     }
 
     @Override
     public AbstractAttachmentHandler getAttachmentHandler() {
-        // TODO Auto-generated method stub
-        return null;
+        return attachmentHandler;
     }
 
     @Override

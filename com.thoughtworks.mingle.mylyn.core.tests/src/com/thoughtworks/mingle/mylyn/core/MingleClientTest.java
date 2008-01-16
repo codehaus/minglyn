@@ -74,9 +74,9 @@ public class MingleClientTest extends AbstractMingleTestCase {
 		MingleTaskList allTasks = mingleClient.getAllTasks("someproject");
 		assertEquals(2, allTasks.size());
 		MingleTask task = (MingleTask) allTasks.get(0);
-		assertEquals("name1", task.getSummary());
-		assertEquals("id1", task.getTaskId());
-		assertEquals("description1", task.getDescription());
+		assertEquals("Hello World Task", task.getSummary());
+		assertEquals("1", task.getTaskId());
+		assertEquals("This card says hello world", task.getDescription());
 		assertEquals("attrib1", task.getAttribute("someAttribute"));
 		assertEquals("attrib2", task.getAttribute("someAttribute1"));
 
@@ -93,9 +93,9 @@ public class MingleClientTest extends AbstractMingleTestCase {
 			protected Reader getResponse(HttpMethod method) throws IOException {
 				return new StringReader("<cards>\n" + 
 						"        <card>\n" + 
-						"                <id>id1</id>\n" + 
-						"                <name>name1</name>\n" + 
-						"                <description>description1</description>\n" + 
+						"                <id>1</id>\n" + 
+						"                <name>Hello World Task</name>\n" + 
+						"                <description>This card says hello world</description>\n" + 
 						"                <someAttribute>attrib1</someAttribute>\n" + 
 						"                <someAttribute1>attrib2</someAttribute1>\n" + 
 						"        </card>\n" + 
@@ -114,14 +114,14 @@ public class MingleClientTest extends AbstractMingleTestCase {
 		MingleClient mingleClient = clientWithCards();
 		
 		HashMap<String, String> hashMap = new HashMap<String, String>();
-		hashMap.put("description", "description1");
-		hashMap.put("id", "id1");
-		hashMap.put("name", "name1");
+		hashMap.put("description", "This card says hello world");
+		hashMap.put("id", "1");
+		hashMap.put("name", "Hello World Task");
 		hashMap.put("someAttribute", "attrib1");
 		hashMap.put("someAttribute1", "attrib2");
 		
-		MingleTask mingleTask = new MingleTask("http://localhost:3000", "id1", "name1", "description1", hashMap);
-		assertEquals(mingleTask, mingleClient.getTask("id1", "someproject"));
+		MingleTask mingleTask = new MingleTask("http://localhost:3000", "1", "Hello World Task", "This card says hello world", hashMap);
+		assertEquals(mingleTask, mingleClient.getTask("1", "someproject"));
 	}
 
 	public void testInvalidXmlThrowsException() throws Exception {

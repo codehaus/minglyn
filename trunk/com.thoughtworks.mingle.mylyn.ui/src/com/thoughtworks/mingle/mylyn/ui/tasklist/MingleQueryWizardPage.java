@@ -20,7 +20,7 @@ public class MingleQueryWizardPage extends AbstractRepositoryQueryPage {
 	private final TaskRepository	repository;
 	private AbstractRepositoryQuery	query;
 	private Composite				composite;
-	private Text					projectNameText;
+	private Text					queryStringText;
 
 	public MingleQueryWizardPage(TaskRepository repository, MingleRepositoryQuery query) {
 		super("Mingle Query", query.getSummary());
@@ -39,19 +39,19 @@ public class MingleQueryWizardPage extends AbstractRepositoryQueryPage {
 
 		Label label = new Label(composite, SWT.NONE);
 		label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
-		label.setText("&Project Name:");
+		label.setText("&Query String:");
 
-		projectNameText = new Text(composite, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
-		projectNameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		projectNameText.setText(((MingleRepositoryQuery) query).getProjectName());
+		queryStringText = new Text(composite, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		queryStringText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		queryStringText.setText(((MingleRepositoryQuery) query).getQueryString());
 	}
 
 	@Override
 	public AbstractRepositoryQuery getQuery() {
-		return new MingleRepositoryQuery(title.getText(), projectNameText.getText(), repository);
+		return new MingleRepositoryQuery(title.getText(), queryString(), repository);
 	}
 
-	private String projectName() {
-		return projectNameText.getText();
+	private String queryString() {
+		return queryStringText.getText();
 	}
 }

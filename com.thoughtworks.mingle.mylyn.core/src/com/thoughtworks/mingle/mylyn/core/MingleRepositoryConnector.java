@@ -81,8 +81,7 @@ public class MingleRepositoryConnector extends AbstractRepositoryConnector {
 
     @Override
     public AbstractTaskDataHandler getTaskDataHandler() {
-        // TODO Auto-generated method stub
-        return null;
+        return taskDataHandler;
     }
 
     @Override
@@ -107,7 +106,7 @@ public class MingleRepositoryConnector extends AbstractRepositoryConnector {
     public IStatus performQuery(AbstractRepositoryQuery query, TaskRepository repository, IProgressMonitor monitor,
                                 ITaskCollector resultCollector) {
 
-        String projectName = ((MingleRepositoryQuery) query).getProjectName();
+        String queryString = ((MingleRepositoryQuery) query).getQueryString();
 
         if (monitor == null) {
             monitor = new NullProgressMonitor();
@@ -117,7 +116,7 @@ public class MingleRepositoryConnector extends AbstractRepositoryConnector {
             monitor.beginTask("Running mingle query", IProgressMonitor.UNKNOWN);
             client.validate();
 
-            MingleTaskList tasks = client.getAllTasks(projectName);
+            MingleTaskList tasks = client.getAllTasks(queryString);
             for (AbstractTask abstractTask : tasks) {
                 resultCollector.accept(abstractTask);
             }

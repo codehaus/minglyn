@@ -10,16 +10,16 @@ import org.eclipse.mylyn.tasks.core.TaskRepository;
  */
 public class MingleRepositoryQuery extends AbstractRepositoryQuery {
 
-	private final String			projectName;
+	private final String			queryString;
 	private final TaskRepository	repository;
 
-	public MingleRepositoryQuery(String description, String projectName, TaskRepository repository) {
+	public MingleRepositoryQuery(String description, String queryString, TaskRepository repository) {
 		super(description);
-		this.projectName = projectName;
+		this.queryString = queryString;
 		this.repository = repository;
 		this.repositoryUrl = repository.getUrl();
 		try {
-			this.url = new MingleClient("", "", repositoryUrl).projectHomePage(projectName);
+			this.url = new MingleClient("", "", repositoryUrl).queryUrl(queryString);
 		} catch (MalformedURLException e) {
 			throw new IllegalArgumentException("invalid url", e);
 		}
@@ -30,8 +30,8 @@ public class MingleRepositoryQuery extends AbstractRepositoryQuery {
 		return Activator.CONNECTOR_KIND;
 	}
 
-	public String getProjectName() {
-		return this.projectName;
+	public String getQueryString() {
+		return this.queryString;
 	}
 
 }

@@ -11,7 +11,7 @@ import com.thoughtworks.mingle.mylyn.core.exceptions.MingleAuthenticationExcepti
 public class MingleClientExternalTest extends AbstractMingleTestCase {
     private static final String MINGLE_PASSWORD = "password";
     private static final String MINGLE_USER = "minglyn";
-    private static final String MINGLE_URL = "http://tidepair4:8080";
+    private static final String MINGLE_URL = "http://tidepair4:8080/projects/data_farm";
 
     public void testValidatesConnectionPasswordIsCorrect() throws Exception {
         MingleClient mingleClient = new MingleClient(MINGLE_USER, MINGLE_PASSWORD, new URL(MINGLE_URL));
@@ -36,6 +36,12 @@ public class MingleClientExternalTest extends AbstractMingleTestCase {
         } catch (IOException e) {
             pass();
         }
+    }
+
+    public void testGets25MingleCards() throws Exception {
+        MingleClient mingleClient = new MingleClient(MINGLE_USER, MINGLE_PASSWORD, new URL(MINGLE_URL));
+        MingleTaskList allTasks = mingleClient.getAllTasks("");
+        assertEquals(25, allTasks.size());
     }
 
 }

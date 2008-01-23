@@ -16,7 +16,10 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
  */
 public class MingleTaskConverter implements Converter {
 
-	private final String	serverUrl;
+	private static final String DESCRIPTION = "description";
+    private static final String NAME = "name";
+    private static final String ID = "number";
+    private final String	serverUrl;
 
 	public MingleTaskConverter(URL serverUrl) {
 		this(serverUrl.toString());
@@ -31,9 +34,9 @@ public class MingleTaskConverter implements Converter {
 
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		hashMap.putAll(mingleTask.attributes);
-		hashMap.put("id", mingleTask.getTaskId());
-		hashMap.put("name", mingleTask.getSummary());
-		hashMap.put("description", mingleTask.getDescription());
+		hashMap.put(ID, mingleTask.getTaskId());
+		hashMap.put(NAME, mingleTask.getSummary());
+		hashMap.put(DESCRIPTION, mingleTask.getDescription());
 
 		Set<Entry<String, String>> entrySet = hashMap.entrySet();
 		for (Entry<String, String> entry : entrySet) {
@@ -59,7 +62,7 @@ public class MingleTaskConverter implements Converter {
 				break;
 			}
 		}
-		return new MingleTask(serverUrl, map.get("id"), map.get("name"), map.get("description"), map);
+		return new MingleTask(serverUrl, map.get(ID), map.get(NAME), map.get(DESCRIPTION), map);
 	}
 
 	public boolean canConvert(Class type) {

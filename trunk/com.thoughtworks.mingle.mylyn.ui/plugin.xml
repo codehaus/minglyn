@@ -32,7 +32,7 @@
             addAutomatically="true"
             label="TidePair4"
             repositoryKind="mingle"
-            urlRepository="http://tidepair4:8080">
+            urlRepository="http://tidepair4:8080/projects/data_farm">
       </repository>
    </extension>
 

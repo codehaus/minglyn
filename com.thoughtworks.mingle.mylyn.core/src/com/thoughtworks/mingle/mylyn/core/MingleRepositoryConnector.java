@@ -75,7 +75,7 @@ public class MingleRepositoryConnector extends AbstractRepositoryConnector {
     @Override
     public String getRepositoryUrlFromTaskUrl(String taskFullUrl) {
         // TODO Auto-generated method stub
-        return null;
+        throw new RuntimeException("Not Implemented");
     }
 
     @Override
@@ -86,19 +86,19 @@ public class MingleRepositoryConnector extends AbstractRepositoryConnector {
     @Override
     public String getTaskIdFromTaskUrl(String taskFullUrl) {
         // TODO Auto-generated method stub
-        return null;
+        throw new RuntimeException("Not Implemented");
     }
 
     @Override
     public String getTaskUrl(String repositoryUrl, String taskId) {
-        // TODO Auto-generated method stub
-        return null;
+        return repositoryUrl + "/cards/" + taskId;
     }
 
     @Override
     public boolean markStaleTasks(TaskRepository repository, Set<AbstractTask> tasks, IProgressMonitor monitor) throws CoreException {
         // TODO Auto-generated method stub
-        return false;
+        return true;
+        // throw new RuntimeException("Not Implemented");
     }
 
     @Override
@@ -137,20 +137,22 @@ public class MingleRepositoryConnector extends AbstractRepositoryConnector {
     @Override
     public void updateAttributes(TaskRepository repository, IProgressMonitor monitor) throws CoreException {
         // TODO Auto-generated method stub
-
+        throw new RuntimeException("Not Implemented");
     }
 
     @Override
     public void updateTaskFromRepository(TaskRepository repository, AbstractTask repositoryTask, IProgressMonitor monitor)
             throws CoreException {
         // TODO Auto-generated method stub
-
+        throw new RuntimeException("Not Implemented");
     }
 
     @Override
     public void updateTaskFromTaskData(TaskRepository repository, AbstractTask repositoryTask, RepositoryTaskData taskData) {
+        // do nothing, the MingleTask is already populated with the required values.
         // TODO Auto-generated method stub
-
+        // throw new RuntimeException("Not Implemented");
     }
 
 }
+

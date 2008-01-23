@@ -1,8 +1,5 @@
 package com.thoughtworks.mingle.mylyn.core;
 
-import static com.thoughtworks.mingle.mylyn.core.MingleConstants.LOGIN_URL;
-import static com.thoughtworks.mingle.mylyn.core.MingleConstants.PROJECTS_BASE_URL;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -20,6 +17,7 @@ import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.eclipse.mylyn.tasks.core.RepositoryTaskAttribute;
 import org.eclipse.mylyn.tasks.core.RepositoryTaskData;
 import org.eclipse.mylyn.tasks.core.TaskRepository;
 
@@ -37,6 +35,7 @@ public class MingleClient {
     private String password;
     private String userName;
     protected HttpClient httpClient;
+    public static final MingleAttributeFactory attributeFactory = new MingleAttributeFactory();
 
     public MingleClient(String userName, String password, URL serverUrl) {
         this.userName = userName;
@@ -163,8 +162,18 @@ public class MingleClient {
     }
 
     public RepositoryTaskData getTaskData(String taskId) {
-        return new RepositoryTaskData(new MingleAttributeFactory(), Activator.CONNECTOR_KIND, this.serverUrl.toString(), taskId);
+        RepositoryTaskData taskData = new RepositoryTaskData(new MingleAttributeFactory(), Activator.CONNECTOR_KIND, this.serverUrl
+                .toString(), taskId);
+
+        for (MingleCardElement element : MingleCardElement.values()) {
+            RepositoryTaskAttribute reportAttribute = makeNewAttribute(element);
+            taskData.addAttribute(element.getKeyString(), reportAttribute);
+        }
+        return taskData;
     }
 
+    private RepositoryTaskAttribute makeNewAttribute(MingleCardElement element) {
+        return attributeFactory.createAttribute(element.getKeyString());
+    }
 
 }

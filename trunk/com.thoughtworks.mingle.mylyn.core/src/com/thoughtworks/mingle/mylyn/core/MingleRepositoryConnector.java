@@ -41,14 +41,12 @@ public class MingleRepositoryConnector extends AbstractRepositoryConnector {
 
     @Override
     public boolean canCreateNewTask(TaskRepository repository) {
-        // TODO Auto-generated method stub
-        throw new RuntimeException("Not Implemented");
+        return false;
     }
 
     @Override
     public boolean canCreateTaskFromKey(TaskRepository repository) {
-        // TODO Auto-generated method stub
-        throw new RuntimeException("Not Implemented");
+        return false;
     }
 
     @Override
@@ -73,10 +71,13 @@ public class MingleRepositoryConnector extends AbstractRepositoryConnector {
     }
 
     @Override
-    public String getRepositoryUrlFromTaskUrl(String taskFullUrl) {
-        // TODO Auto-generated method stub
-        throw new RuntimeException("Not Implemented");
-    }
+    public String getRepositoryUrlFromTaskUrl(String url) {
+        if (url == null) {
+            return null;
+        }
+        int index = url.indexOf(MingleConstants.CARDS_BASE_URL);
+        return index == -1 ? null : url.substring(0, index);
+      }
 
     @Override
     public AbstractTaskDataHandler getTaskDataHandler() {
@@ -85,20 +86,17 @@ public class MingleRepositoryConnector extends AbstractRepositoryConnector {
 
     @Override
     public String getTaskIdFromTaskUrl(String taskFullUrl) {
-        // TODO Auto-generated method stub
         throw new RuntimeException("Not Implemented");
     }
 
     @Override
     public String getTaskUrl(String repositoryUrl, String taskId) {
-        return repositoryUrl + "/cards/" + taskId;
+        return repositoryUrl + MingleConstants.CARDS_BASE_URL + taskId;
     }
 
     @Override
     public boolean markStaleTasks(TaskRepository repository, Set<AbstractTask> tasks, IProgressMonitor monitor) throws CoreException {
-        // TODO Auto-generated method stub
         return true;
-        // throw new RuntimeException("Not Implemented");
     }
 
     @Override

@@ -20,23 +20,17 @@ public class MingleAttachmentHandler extends AbstractAttachmentHandler {
 
     @Override
     public boolean canDeprecate(TaskRepository repository, RepositoryAttachment attachment) {
-        // TODO Auto-generated method stub
-        throw new RuntimeException("Not Implemented");
-
+        return false;
     }
 
     @Override
     public boolean canDownloadAttachment(TaskRepository repository, AbstractTask task) {
-        // TODO Auto-generated method stub
-        throw new RuntimeException("Not Implemented");
-
+        return false;
     }
 
     @Override
     public boolean canUploadAttachment(TaskRepository repository, AbstractTask task) {
-        // TODO Auto-generated method stub
-        throw new RuntimeException("Not Implemented");
-
+        return false;
     }
 
     @Override
@@ -49,7 +43,6 @@ public class MingleAttachmentHandler extends AbstractAttachmentHandler {
 
     @Override
     public void updateAttachment(TaskRepository repository, RepositoryAttachment attachment) throws CoreException {
-        // TODO Auto-generated method stub
         throw new RuntimeException("Not Implemented");
 
     }

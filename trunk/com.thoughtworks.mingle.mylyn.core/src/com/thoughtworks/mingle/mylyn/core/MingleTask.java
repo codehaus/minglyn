@@ -16,6 +16,7 @@ public class MingleTask extends AbstractTask {
 	public MingleTask(String repositoryUrl, String taskId, String summary, String description,
 			Map<String, String> attributes) {
 		super(repositoryUrl, taskId, summary);
+		setUrl(repositoryUrl + MingleConstants.CARDS_BASE_URL + taskId);
 		this.description = description;
 		this.attributes = new TreeMap<String, String>(attributes);
 	}

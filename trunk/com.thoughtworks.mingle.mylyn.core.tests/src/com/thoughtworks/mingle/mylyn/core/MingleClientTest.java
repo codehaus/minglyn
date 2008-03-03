@@ -6,12 +6,10 @@ import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpStatus;
-import org.eclipse.mylyn.tasks.core.AbstractTask;
 
 import com.thoughtworks.mingle.mylyn.core.exceptions.CouldNotParseTasksException;
 import com.thoughtworks.mingle.mylyn.core.exceptions.MingleAuthenticationException;

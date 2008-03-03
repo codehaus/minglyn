@@ -91,14 +91,14 @@ public class MingleClientTest extends AbstractMingleTestCase {
 			protected Reader getResponse(HttpMethod method) throws IOException {
 				return new StringReader("<cards>\n" + 
 						"        <card>\n" + 
-						"                <id>1</id>\n" + 
+						"                <number>1</number>\n" + 
 						"                <name>Hello World Task</name>\n" + 
 						"                <description>This card says hello world</description>\n" + 
 						"                <someAttribute>attrib1</someAttribute>\n" + 
 						"                <someAttribute1>attrib2</someAttribute1>\n" + 
 						"        </card>\n" + 
 						"        <card>\n" + 
-						"                <id>id2</id>\n" + 
+						"                <number>id2</number>\n" + 
 						"                <name>name2</name>\n" + 
 						"                <description>description2</description>\n" + 
 						"        </card>\n" + 
@@ -113,7 +113,7 @@ public class MingleClientTest extends AbstractMingleTestCase {
 		
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		hashMap.put("description", "This card says hello world");
-		hashMap.put("id", "1");
+		hashMap.put("number", "1");
 		hashMap.put("name", "Hello World Task");
 		hashMap.put("someAttribute", "attrib1");
 		hashMap.put("someAttribute1", "attrib2");

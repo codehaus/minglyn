@@ -1,14 +1,18 @@
 package com.thoughtworks.mingle.mylyn.ui;
 
+import org.eclipse.mylyn.internal.web.tasks.BrowserEditorInput;
+import org.eclipse.mylyn.internal.web.tasks.BrowserFormPage;
 import org.eclipse.mylyn.tasks.core.AbstractTask;
 import org.eclipse.mylyn.tasks.core.TaskRepository;
 import org.eclipse.mylyn.tasks.ui.TasksUiPlugin;
+import org.eclipse.mylyn.tasks.ui.editors.AbstractRepositoryTaskEditor;
 import org.eclipse.mylyn.tasks.ui.editors.AbstractTaskEditorFactory;
 import org.eclipse.mylyn.tasks.ui.editors.RepositoryTaskEditorInput;
 import org.eclipse.mylyn.tasks.ui.editors.TaskEditor;
 import org.eclipse.mylyn.tasks.ui.editors.TaskEditorInput;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.part.EditorPart;
 
 import com.thoughtworks.mingle.mylyn.core.Activator;
 import com.thoughtworks.mingle.mylyn.core.MingleTask;
@@ -26,48 +30,35 @@ public class MingleTaskEditorFactory extends AbstractTaskEditorFactory {
 
     @Override
     public boolean canCreateEditorFor(IEditorInput input) {
-        if (input instanceof RepositoryTaskEditorInput) {
-            RepositoryTaskEditorInput existingInput = (RepositoryTaskEditorInput) input;
-            return existingInput.getTaskData() != null && Activator.CONNECTOR_KIND.equals(existingInput.getRepository().getConnectorKind());
-        }
-        return false;
+        return input instanceof BrowserEditorInput;
     }
 
     @Override
     public IEditorPart createEditor(TaskEditor parentEditor, IEditorInput editorInput) {
-        if (editorInput instanceof RepositoryTaskEditorInput) {
-            RepositoryTaskEditorInput taskInput = (RepositoryTaskEditorInput) editorInput;
-            if (taskInput.getTaskData().isNew()) {
-                return new MingleTaskEditor(parentEditor);
-            } else {
-                return new MingleTaskEditor(parentEditor);
-            }
-        } else if (editorInput instanceof TaskEditorInput) {
-            return new MingleTaskEditor(parentEditor);
+        AbstractRepositoryTaskEditor editor = null;
+        if (editorInput instanceof TaskEditorInput) {
+            TaskEditorInput taskInput = (TaskEditorInput) editorInput;
+            return createBrowser(parentEditor, taskInput.getTask().getUrl());
         }
-        return null;
-
+        return editor;
     }
 
     @Override
     public IEditorInput createEditorInput(AbstractTask task) {
         if (task instanceof MingleTask) {
-            MingleTask mingleTask = (MingleTask) task;
             final TaskRepository repository = TasksUiPlugin.getRepositoryManager().getRepository(Activator.CONNECTOR_KIND,
-                                                                                                 mingleTask.getRepositoryUrl());
-
-            try {
-                return new RepositoryTaskEditorInput(repository, mingleTask.getTaskId(), mingleTask.getUrl());
-            } catch (Exception e) {
-                // FIXME
-                // StatusHandler.fail(e, "Could not create Mingle editor input",
-                // true);
-            }
-
+                                                                                                 task.getRepositoryUrl());
+            return new RepositoryTaskEditorInput(repository, task.getUrl(), task.getTaskId());
+        } else {
+            return null;
         }
-        return null;
+        
     }
 
+    private EditorPart createBrowser(TaskEditor parentEditor, String url) {
+        return new BrowserFormPage(parentEditor, "Browser");
+    }
+    
     @Override
     public String getTitle() {
         return "Mingle";

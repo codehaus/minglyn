@@ -22,7 +22,7 @@ public class MingleTaskEditor extends AbstractRepositoryTaskEditor {
 
     }
 
-    protected void createCustomAttributeLayout(Composite composite) {
+    protected void _createCustomAttributeLayout(Composite composite) {
         RepositoryTaskAttribute attribute = new RepositoryTaskAttribute("id", "name", false);
 
         Label label = createLabel(composite, attribute);

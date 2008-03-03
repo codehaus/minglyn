@@ -3,7 +3,6 @@ package com.thoughtworks.mingle.mylyn.core;
 import java.util.Date;
 
 import org.eclipse.mylyn.tasks.core.AbstractAttributeFactory;
-import org.eclipse.mylyn.tasks.core.RepositoryTaskAttribute;
 
 public class MingleAttributeFactory extends AbstractAttributeFactory {
 

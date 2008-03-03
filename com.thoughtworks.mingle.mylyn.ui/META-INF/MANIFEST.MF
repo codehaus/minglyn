@@ -11,8 +11,12 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.mylyn.tasks.core,
  com.thoughtworks.mingle.mylyn.core,
  org.eclipse.search,
- org.eclipse.ui.forms
+ org.eclipse.ui.forms,
+ org.eclipse.mylyn.web.core,
+ org.eclipse.mylyn.web.tasks,
+ org.eclipse.mylyn.web.ui
 Eclipse-LazyStart: true
 Bundle-ClassPath: .
 Export-Package: com.thoughtworks.mingle.mylyn.ui,
  com.thoughtworks.mingle.mylyn.ui.tasklist
+Bundle-RequiredExecutionEnvironment: J2SE-1.5

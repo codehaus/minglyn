@@ -39,7 +39,7 @@ public class MingleQueryWizardPage extends AbstractRepositoryQueryPage {
 
         Label label = new Label(composite, SWT.NONE);
         label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
-        label.setText("&Query String:");
+        label.setText("&Query string (enter the complete URL for the card list from the address bar of the browser)");
 
         queryStringText = new Text(composite, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
         queryStringText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));

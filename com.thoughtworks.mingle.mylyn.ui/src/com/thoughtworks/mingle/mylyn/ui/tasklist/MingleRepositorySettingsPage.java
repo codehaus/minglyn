@@ -3,6 +3,8 @@ package com.thoughtworks.mingle.mylyn.ui.tasklist;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -13,6 +15,8 @@ import org.eclipse.mylyn.tasks.core.TaskRepository;
 import org.eclipse.mylyn.tasks.ui.AbstractRepositoryConnectorUi;
 import org.eclipse.mylyn.tasks.ui.wizards.AbstractRepositorySettingsPage;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 
 import com.thoughtworks.mingle.mylyn.core.MingleClient;
 import com.thoughtworks.mingle.mylyn.core.exceptions.MingleAuthenticationException;
@@ -27,7 +31,7 @@ public class MingleRepositorySettingsPage extends AbstractRepositorySettingsPage
 	 * @param repositoryUi
 	 */
 	public MingleRepositorySettingsPage(AbstractRepositoryConnectorUi repositoryUi) {
-		super("Mingle Repository Settings", "Example: https://mingle.mycompany.com", repositoryUi);
+		super("Mingle Repository Settings", "Example: https://mingle.mycompany.com:8080/projects/my_project", repositoryUi);
 	}
 
 	@Override
@@ -35,6 +39,13 @@ public class MingleRepositorySettingsPage extends AbstractRepositorySettingsPage
 		for (RepositoryTemplate template : connector.getTemplates()) {
 			serverUrlCombo.add(template.label);
 		}
+		serverUrlCombo.setText("http://mingle.yourcompany.com:8080/projects/my_project");
+		List<Control> siblings = Arrays.asList(serverUrlCombo.getParent().getChildren());
+		int indexOf = siblings.indexOf(serverUrlCombo);
+		Label serverURLLabel = (Label) siblings.get(indexOf-1);
+		serverURLLabel.setText("Project URL:");
+		System.out.println(serverURLLabel);
+		
 	}
 
 	@Override

@@ -26,6 +26,8 @@
             class="com.thoughtworks.mingle.mylyn.ui.MingleTaskEditorFactory">
       </editorFactory>
    </extension>
+   
+   <!--
    <extension
          point="org.eclipse.mylyn.tasks.core.templates">
       <repository
@@ -35,5 +37,5 @@
             urlRepository="http://tidepair4:8080/projects/data_farm">
       </repository>
    </extension>
-
+   -->
 </plugin>

@@ -73,6 +73,16 @@
 			<arg line="-o -qq eclipse-test-framework-${buildId}.zip 
 								-d ${install}" />
 		</exec>
+		
+		<exec dir="." executable="unzip">
+			<arg line="-o -qq mylyn-2.1-e3.3.zip 
+								-d ${install}/eclipse" />
+		</exec>
+									
+		<exec dir="." executable="unzip">
+			<arg line="-o -qq mylyn-2.1-extras.zip 
+								-d ${install}/eclipse" />
+		</exec>
 
 		<copy todir="${eclipse-home}" includeemptydirs="true">
 			<fileset dir="${mylyn.base}" />

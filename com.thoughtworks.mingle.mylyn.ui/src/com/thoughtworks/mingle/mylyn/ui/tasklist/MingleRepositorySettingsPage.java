@@ -39,7 +39,9 @@ public class MingleRepositorySettingsPage extends AbstractRepositorySettingsPage
 		for (RepositoryTemplate template : connector.getTemplates()) {
 			serverUrlCombo.add(template.label);
 		}
-		serverUrlCombo.setText("http://mingle.yourcompany.com:8080/projects/my_project");
+		if (getRepository() == null){
+	        serverUrlCombo.setText("http://mingle.yourcompany.com:8080/projects/my_project");
+		}
 		List<Control> siblings = Arrays.asList(serverUrlCombo.getParent().getChildren());
 		int indexOf = siblings.indexOf(serverUrlCombo);
 		Label serverURLLabel = (Label) siblings.get(indexOf-1);
